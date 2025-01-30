@@ -22,7 +22,7 @@ function submit(){
     }).catch((error) => {
         alert("Country not found.");
         if(error){
-            card.style.display = "none";
+            card.style.display = 'none';
         }
     })
 
