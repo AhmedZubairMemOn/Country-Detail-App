@@ -8,19 +8,22 @@ const card = document.querySelector(".card")
 
 function submit(){
     console.log(input.value);
-    card.style.display = 'block'
-   if(input.value === ""){
-    card.style.display = 'none'
-   }
     fetch(`https://restcountries.com/v3.1/name/${input.value}`)
     .then((response) =>{
-       return response.json()
+        return response.json()
     }).then((response) =>{
+        card.style.display = 'block'
         const [country] = response
         console.log(country);
         const {name, flags, borders, capital, population} = country
         img.src = flags.png
         names.innerHTML = name.common
         description.innerHTML = `This is the country with the population of ${population} and the capital is ${capital[0]}`
+    }).catch((error) => {
+        alert("Country not found.");
+        if(error){
+            card.style.display = "none";
+        }
     })
+
 }
